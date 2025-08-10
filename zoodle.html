@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zoddle</title>
+    <meta name="description" content="Lovable Generated Project" />
+    <meta name="author" content="Lovable" />
+
+    <meta property="og:title" content="KidsWear Hub" />
+    <meta property="og:description" content="Lovable Generated Project" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@lovable_dev" />
+    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: 'hsl(280, 100%, 70%)',
+                        'primary-foreground': 'hsl(0, 0%, 100%)',
+                        secondary: 'hsl(45, 100%, 85%)',
+                        'secondary-foreground': 'hsl(222.2, 47.4%, 11.2%)',
+                        accent: 'hsl(195, 100%, 75%)',
+                        'accent-foreground': 'hsl(222.2, 47.4%, 11.2%)',
+                        background: 'hsl(0, 0%, 100%)',
+                        foreground: 'hsl(222.2, 84%, 4.9%)',
+                        muted: 'hsl(210, 40%, 96.1%)',
+                        'muted-foreground': 'hsl(215.4, 16.3%, 46.9%)',
+                        border: 'hsl(214.3, 31.8%, 91.4%)',
+                        input: 'hsl(214.3, 31.8%, 91.4%)',
+                        ring: 'hsl(280, 100%, 70%)',
+                        destructive: 'hsl(0, 84.2%, 60.2%)',
+                        'destructive-foreground': 'hsl(210, 40%, 98%)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, hsl(0, 0%, 100%) 0%, hsl(210, 40%, 96.1%) 50%, hsl(280, 100%, 70%, 0.2) 100%);
+        }
+        
+        .btn-primary {
+            background: hsl(280, 100%, 70%);
+            color: hsl(0, 0%, 100%);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary:hover {
+            background: hsl(280, 100%, 65%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-banner {
+            background: linear-gradient(135deg, hsl(280, 100%, 70%), hsl(195, 100%, 75%));
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-banner:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn-selection {
+            background: hsl(195, 100%, 75%);
+            color: hsl(222.2, 47.4%, 11.2%);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-selection:hover {
+            background: hsl(195, 100%, 70%);
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .collection-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .collection-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .collection-card.selected {
+            border: 2px solid hsl(280, 100%, 70%);
+            box-shadow: 0 0 20px rgba(280, 100%, 70%, 0.3);
+            transform: scale(1.05);
+        }
+        
+        .slider {
+            -webkit-appearance: none;
+            appearance: none;
+            height: 8px;
+            background: hsl(210, 40%, 96.1%);
+            border-radius: 5px;
+            outline: none;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: hsl(280, 100%, 70%);
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+        
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: hsl(280, 100%, 70%);
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+        }
+        
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .calendar-day:hover {
+            background: hsl(195, 100%, 75%);
+            color: white;
+        }
+        
+        .calendar-day.selected {
+            background: hsl(280, 100%, 70%);
+            color: white;
+        }
+        
+        .calendar-day.disabled {
+            color: hsl(215.4, 16.3%, 46.9%);
+            cursor: not-allowed;
+        }
+        
+        .time-slot {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .time-slot:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .time-slot.selected {
+            border: 2px solid hsl(280, 100%, 70%);
+            background: hsl(280, 100%, 70%, 0.05);
+        }
+    </style>
+  </head>
+
+  <body class="min-h-screen gradient-bg">
+    <!-- Landing Page -->
+    <div id="landing-page" class="page">
+        <div class="container mx-auto px-4 py-12">
+            <!-- Header -->
+            <div class="text-center mb-16">
+                <h1 class="text-5xl font-bold mb-4" style="background: linear-gradient(135deg, hsl(280, 100%, 70%), hsl(195, 100%, 75%)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                    Zoddle
+                </h1>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Curated collections of beautiful children's clothing delivered to your doorstep
+                </p>
+            </div>
+
+            <!-- Banners Grid -->
+            <div class="grid gap-8 max-w-6xl mx-auto">
+                <!-- Infant Banner -->
+                <div class="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer card-hover" onclick="selectCategory('infant')">
+                    <div class="aspect-[16/9] md:aspect-[21/9] relative">
+                        <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800&h=400&fit=crop" alt="Shop for Your Infant" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent"></div>
+                        
+                        <!-- Content Overlay -->
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="text-white p-8 md:p-12 max-w-2xl">
+                                <h2 class="text-3xl md:text-4xl font-bold mb-2">Shop for Your Infant</h2>
+                                <p class="text-lg md:text-xl mb-4 opacity-90">From the comfort of your house</p>
+                                <p class="text-sm md:text-base mb-6 opacity-80">Discover our curated collection of soft, comfortable, and adorable clothing for your little one</p>
+                                <button class="btn-banner px-6 py-3 rounded-lg font-bold">Explore Collection</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Monsoon Banner -->
+                <div class="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer card-hover" onclick="selectCategory('monsoon')">
+                    <div class="aspect-[16/9] md:aspect-[21/9] relative">
+                        <img src="https://images.unsplash.com/photo-1503944583220-79d8926ad5e2?w=800&h=400&fit=crop" alt="Get Monsoon Ready" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent"></div>
+                        
+                        <!-- Content Overlay -->
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="text-white p-8 md:p-12 max-w-2xl">
+                                <h2 class="text-3xl md:text-4xl font-bold mb-2">Get Monsoon Ready</h2>
+                                <p class="text-lg md:text-xl mb-4 opacity-90">Raincoats & warmer clothes brought home</p>
+                                <p class="text-sm md:text-base mb-6 opacity-80">Stay dry and cozy with our collection of raincoats, jackets, and warm clothing</p>
+                                <button class="btn-banner px-6 py-3 rounded-lg font-bold">Explore Collection</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Growing Banner -->
+                <div class="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer card-hover" onclick="selectCategory('trendy')">
+                    <div class="aspect-[16/9] md:aspect-[21/9] relative">
+                        <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=800&h=400&fit=crop" alt="Don't We Love Kids Growing Up!" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent"></div>
+                        
+                        <!-- Content Overlay -->
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="text-white p-8 md:p-12 max-w-2xl">
+                                <h2 class="text-3xl md:text-4xl font-bold mb-2">Don't We Love Kids Growing Up!</h2>
+                                <p class="text-lg md:text-xl mb-4 opacity-90">Replenish their wardrobe with latest styles</p>
+                                <p class="text-sm md:text-base mb-6 opacity-80">Trendy, comfortable, and stylish clothing that grows with your child</p>
+                                <button class="btn-banner px-6 py-3 rounded-lg font-bold">Explore Collection</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Section -->
+            <div class="mt-20 grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">🏠</span>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Home Delivery</h3>
+                    <p class="text-gray-600">Try before you buy in the comfort of your home</p>
+                </div>
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">✨</span>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Curated Collections</h3>
+                    <p class="text-gray-600">Handpicked styles from top brands for your little ones</p>
+                </div>
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">💝</span>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Easy Returns</h3>
+                    <p class="text-gray-600">Hassle-free returns for items that don't fit perfectly</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gender Selection Page -->
+    <div id="gender-selection" class="page hidden">
+        <div class="min-h-screen gradient-bg flex items-center justify-center">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto text-center">
+                    <!-- Header -->
+                    <div class="mb-16">
+                        <h1 class="text-4xl md:text-5xl font-bold mb-4" style="background: linear-gradient(135deg, hsl(280, 100%, 70%), hsl(195, 100%, 75%)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                            Are you looking for clothes for a boy or girl?
+                        </h1>
+                        <p class="text-lg text-gray-600">Choose to see our curated collections</p>
+                    </div>
+
+                    <!-- Gender Selection Cards -->
+                    <div class="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto">
+                        <!-- Boy Selection -->
+                        <div class="group cursor-pointer" onclick="selectGender('boy')">
+                            <div class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 bg-white card-hover">
+                                <div class="aspect-square p-8">
+                                    <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=400&h=400&fit=crop" alt="Boy clothing selection" class="w-full h-full object-cover rounded-xl group-hover:scale-105 transition-transform duration-500">
+                                </div>
+                                <div class="p-6">
+                                    <button class="btn-selection w-full py-3 px-6 rounded-lg font-medium text-lg">Boy</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Girl Selection -->
+                        <div class="group cursor-pointer" onclick="selectGender('girl')">
+                            <div class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 bg-white card-hover">
+                                <div class="aspect-square p-8">
+                                    <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=400&h=400&fit=crop" alt="Girl clothing selection" class="w-full h-full object-cover rounded-xl group-hover:scale-105 transition-transform duration-500">
+                                </div>
+                                <div class="p-6">
+                                    <button class="btn-selection w-full py-3 px-6 rounded-lg font-medium text-lg">Girl</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Back Button -->
+                    <div class="mt-12">
+                        <button onclick="showPage('landing-page')" class="text-gray-500 hover:text-gray-700 transition-colors">
+                            ← Back to Collections
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Age Selection Page -->
+    <div id="age-selection" class="page hidden">
+        <div class="min-h-screen gradient-bg flex items-center justify-center">
+            <div class="container mx-auto px-4">
+                <div class="max-w-2xl mx-auto text-center">
+                    <!-- Header -->
+                    <div class="mb-16">
+                        <h1 class="text-4xl md:text-5xl font-bold mb-4" style="background: linear-gradient(135deg, hsl(280, 100%, 70%), hsl(195, 100%, 75%)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                            Please tell us the age of your kid
+                        </h1>
+                        <p class="text-lg text-gray-600">This helps us curate the perfect collection for your little one</p>
+                    </div>
+
+                    <!-- Age Display -->
+                    <div class="mb-12">
+                        <div id="age-display" class="text-6xl font-bold mb-4" style="color: hsl(280, 100%, 70%);">3 years</div>
+                    </div>
+
+                    <!-- Age Slider -->
+                    <div class="mb-12 px-8">
+                        <input type="range" id="age-slider" class="slider w-full" min="0" max="12" value="3" oninput="updateAge(this.value)">
+                        <div class="flex justify-between text-sm text-gray-500 mt-4">
+                            <span>0-12 months</span>
+                            <span>12+ years</span>
+                        </div>
+                    </div>
+
+                    <!-- Quick Age Selection Buttons -->
+                    <div class="grid grid-cols-3 md:grid-cols-4 gap-3 mb-12" id="age-buttons">
+                        <!-- Age buttons will be generated by JavaScript -->
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="flex justify-between items-center">
+                        <button onclick="showPage('gender-selection')" class="text-gray-500 hover:text-gray-700 transition-colors">
+                            ← Back
+                        </button>
+                        
+                        <button onclick="showPage('collection-selection')" class="btn-primary px-12 py-3 rounded-lg font-medium">
+                            Next
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Collection Selection Page -->
+    <div id="collection-selection" class="page hidden">
+        <div class="min-h-screen gradient-bg py-8">
+            <div class="container mx-auto px-4">
+                <div class="max-w-6xl mx-auto">
+                    <!-- Header -->
+                    <div class="text-center mb-12">
+                        <h1 class="text-4xl md:text-5xl font-bold mb-4" style="background: linear-gradient(135deg, hsl(280, 100%, 70%), hsl(195, 100%, 75%)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                            Customize what we bring
+                        </h1>
+                        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                            Select which collections we should include to help us get you the right things
+                        </p>
+                    </div>
+
+                    <!-- Collections Grid -->
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12" id="collections-grid">
+                        <!-- Collections will be generated by JavaScript -->
+                    </div>
+
+                    <!-- Selected Count -->
+                    <div id="selected-count" class="text-center mb-8 hidden">
+                        <div class="inline-flex items-center gap-2 bg-purple-100 text-purple-700 px-4 py-2 rounded-full">
+                            <span class="font-medium" id="count-text">0 collections selected</span>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="flex justify-between items-center">
+                        <button onclick="showPage('age-selection')" class="text-gray-500 hover:text-gray-700 transition-colors">
+                            ← Back
+                        </button>
+                        
+                        <button id="continue-btn" onclick="showPage('contact-form')" class="btn-primary px-12 py-3 rounded-lg font-medium" disabled>
+                            Continue (0)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Form Page -->
+    <div id="contact-form" class="page hidden">
+        <div class="min-h-screen gradient-bg py-8">
+            <div class="container mx-auto px-4">
+                <div class="max-w-2xl mx-auto">
+                    <!-- Header -->
+                    <div class="text-center mb-12">
+                        <h1 class="text-4xl md:text-5xl font-bold mb-4" style="background: linear-gradient(135deg, hsl(280, 100%, 70%), hsl(195, 100%, 75%)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                            Tell us about yourself
+                        </h1>
+                        <p class="text-lg text-gray-600">We need these details to deliver your curated collection</p>
+                    </div>
+
+                    <!-- Form Card -->
+                    <div class="bg-white rounded-lg shadow-xl p-8">
+                        <h2 class="text-2xl font-semibold text-center mb-8">Contact Information</h2>
+                        
+                        <form id="contact-form-element" class="space-y-6">
+                            <!-- Parent Name -->
+                            <div class="space-y-2">
+                                <label for="parentName" class="block text-sm font-medium text-gray-700">
+                                    Parent/Guardian Name *
+                                </label>
+                                <input type="text" id="parentName" name="parentName" placeholder="Enter your full name" 
+                                       class="w-full h-12 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                            </div>
+
+                            <!-- Child Name -->
+                            <div class="space-y-2">
+                                <label for="childName" class="block text-sm font-medium text-gray-700">
+                                    Child's Name *
+                                </label>
+                                <input type="text" id="childName" name="childName" placeholder="Enter your child's name" 
+                                       class="w-full h-12 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                            </div>
+
+                            <!-- Phone Number -->
+                            <div class="space-y-2">
+                                <label for="phone" class="block text-sm font-medium text-gray-700">
+                                    Phone Number *
+                                </label>
+                                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" 
+                                       class="w-full h-12 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                            </div>
+
+                            <!-- Address -->
+                            <div class="space-y-2">
+                                <label for="address" class="block text-sm font-medium text-gray-700">
+                                    Delivery Address *
+                                </label>
+                                <input type="text" id="address" name="address" placeholder="Enter your complete address" 
+                                       class="w-full h-12 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                            </div>
+
+                            <!-- Summary -->
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h3 class="font-medium mb-2">Your Selection Summary:</h3>
+                                <div id="selection-summary" class="text-sm text-gray-600 space-y-1">
+                                    <!-- Summary will be populated by JavaScript -->
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button type="submit" class="btn-primary w-full h-12 rounded-lg font-medium">
+                                Continue to Scheduling
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="flex justify-center mt-8">
+                        <button onclick="showPage('collection-selection')" class="text-gray-500 hover:text-gray-700 transition-colors">
+                            ← Back to Collections
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scheduling Page -->
+    <div id="scheduling" class="page hidden">
+        <div class="min-h-screen gradient-bg py-8">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto">
+                    <!-- Header -->
+                    <div class="text-center mb-12">
+                        <h1 class="text-4xl md:text-5xl font-bold mb-4" style="background: linear-gradient(135deg, hsl(280, 100%, 70%), hsl(195, 100%, 75%)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                            When should we come?
+                        </h1>
+                        <p class="text-lg text-gray-600">Choose a convenient date and time for us to bring your curated collection</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <!-- Calendar Section -->
+                        <div class="bg-white rounded-lg shadow-xl p-6">
+                            <h2 class="text-xl font-semibold mb-6">Select a Date</h2>
+                            <div id="calendar" class="space-y-4">
+                                <!-- Calendar will be generated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Time Slot Section -->
+                        <div class="bg-white rounded-lg shadow-xl p-6">
+                            <h2 class="text-xl font-semibold mb-2">Select Time Slot</h2>
+                            <p id="selected-date-text" class="text-sm text-gray-600 mb-6">Please select a date first</p>
+                            
+                            <div id="time-slots" class="space-y-4">
+                                <!-- Time slots will be generated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Booking Summary -->
+                    <div id="booking-summary" class="mt-8 bg-white rounded-lg shadow-xl p-6 hidden">
+                        <h2 class="text-xl font-semibold text-center mb-6">Booking Summary</h2>
+                        <div class="grid md:grid-cols-2 gap-4 text-sm mb-6">
+                            <div>
+                                <p class="font-medium mb-2">Customer Details:</p>
+                                <div id="customer-details">
+                                    <!-- Customer details will be populated by JavaScript -->
+                                </div>
+                            </div>
+                            <div>
+                                <p class="font-medium mb-2">Visit Details:</p>
+                                <div id="visit-details">
+                                    <!-- Visit details will be populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="pt-4 border-t border-gray-200">
+                            <p class="text-sm text-gray-600 text-center">
+                                Our stylist will bring a curated selection based on your preferences. 
+                                You only pay for what you keep!
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="flex justify-between items-center mt-12">
+                        <button onclick="showPage('contact-form')" class="text-gray-500 hover:text-gray-700 transition-colors">
+                            ← Back to Contact Info
+                        </button>
+                        
+                        <button id="confirm-booking-btn" onclick="confirmBooking()" class="btn-primary px-12 py-3 rounded-lg font-medium" disabled>
+                            Confirm Booking
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg p-8 max-w-md mx-4 text-center">
+            <div class="text-6xl mb-4">🎉</div>
+            <h2 class="text-2xl font-bold mb-4">Visit Scheduled Successfully!</h2>
+            <p id="success-message" class="text-gray-600 mb-6"></p>
+            <button onclick="closeSuccessModal()" class="btn-primary px-6 py-2 rounded-lg">
+                Great!
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Global state
+        let appState = {
+            category: '',
+            gender: '',
+            age: 3,
+            selectedCollections: [],
+            contactInfo: {},
+            selectedDate: null,
+            selectedTimeSlot: ''
+        };
+
+        // Collections data
+        const collections = [
+            {
+                id: "everyday-essentials",
+                name: "Everyday Essentials",
+                description: "We will bring you comfortable basics ensuring we give you enough options for daily wear, playtime, and casual outings.",
+                image: "👕",
+                brands: ["Carter's", "H&M Kids", "Zara Kids"],
+                items: ["T-shirts", "Pants", "Shorts", "Basic Tops"]
+            },
+            {
+                id: "special-occasions",
+                name: "Special Occasions",
+                description: "We will bring you elegant formal wear ensuring we give you enough options for parties, family gatherings, and special events.",
+                image: "🎀",
+                brands: ["Polo Ralph Lauren", "Tommy Hilfiger Kids", "Burberry Kids"],
+                items: ["Dresses", "Formal Shirts", "Dress Pants", "Blazers"]
+            },
+            {
+                id: "active-play",
+                name: "Active & Play",
+                description: "We will bring you durable activewear ensuring we give you enough options for sports, playground fun, and outdoor adventures.",
+                image: "🏃",
+                brands: ["Nike Kids", "Adidas Kids", "Under Armour"],
+                items: ["Sportswear", "Sneakers", "Athletic Shorts", "Active Tops"]
+            },
+            {
+                id: "seasonal-must-haves",
+                name: "Seasonal Must-Haves",
+                description: "We will bring you weather-appropriate clothing ensuring we give you enough options for current season needs and upcoming weather changes.",
+                image: "🌈",
+                brands: ["The North Face Kids", "Patagonia Kids", "Columbia"],
+                items: ["Jackets", "Sweaters", "Weather Gear", "Seasonal Accessories"]
+            },
+            {
+                id: "trendy-fashion",
+                name: "Trendy Fashion",
+                description: "We will bring you latest style pieces ensuring we give you enough options for fashion-forward looks and current trends.",
+                image: "✨",
+                brands: ["Stella McCartney Kids", "Mini Rodini", "Bobo Choses"],
+                items: ["Designer Pieces", "Trendy Accessories", "Statement Items", "Fashion Basics"]
+            },
+            {
+                id: "comfort-sleep",
+                name: "Comfort & Sleep",
+                description: "We will bring you cozy sleepwear ensuring we give you enough options for bedtime comfort, lounging, and relaxation.",
+                image: "🌙",
+                brands: ["PJ Salvage Kids", "Hatley", "Little Sleepies"],
+                items: ["Pajamas", "Nightgowns", "Robes", "Slippers"]
+            }
+        ];
+
+        const timeSlots = [
+            { id: "morning", label: "Morning (9:00 AM - 12:00 PM)", available: true },
+            { id: "afternoon", label: "Afternoon (2:00 PM - 5:00 PM)", available: true },
+            { id: "evening", label: "Evening (6:00 PM - 8:00 PM)", available: true }
+        ];
+
+        // Utility functions
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.add('hidden');
+            });
+            document.getElementById(pageId).classList.remove('hidden');
+            document.getElementById(pageId).classList.add('fade-in');
+        }
+
+        function selectCategory(category) {
+            appState.category = category;
+            showPage('gender-selection');
+        }
+
+        function selectGender(gender) {
+            appState.gender = gender;
+            showPage('age-selection');
+            initializeAgeSelection();
+        }
+
+        function getAgeText(ageValue) {
+            if (ageValue < 1) return "0-12 months";
+            if (ageValue === 1) return "1 year";
+            return `${ageValue} years`;
+        }
+
+        function updateAge(value) {
+            appState.age = parseInt(value);
+            document.getElementById('age-display').textContent = getAgeText(appState.age);
+            
+            // Update button states
+            document.querySelectorAll('.age-btn').forEach(btn => {
+                btn.classList.remove('bg-purple-500', 'text-white');
+                btn.classList.add('bg-white', 'text-gray-700', 'border', 'border-gray-300');
+            });
+            
+            const selectedBtn = document.querySelector(`[data-age="${value}"]`);
+            if (selectedBtn) {
+                selectedBtn.classList.remove('bg-white', 'text-gray-700', 'border', 'border-gray-300');
+                selectedBtn.classList.add('bg-purple-500', 'text-white');
+            }
+        }
+
+        function initializeAgeSelection() {
+            const ageOptions = [
+                { value: 0, label: "0-12 months" },
+                { value: 1, label: "1 year" },
+                { value: 2, label: "2 years" },
+                { value: 3, label: "3 years" },
+                { value: 4, label: "4 years" },
+                { value: 5, label: "5 years" },
+                { value: 6, label: "6 years" },
+                { value: 7, label: "7 years" },
+                { value: 8, label: "8 years" },
+                { value: 9, label: "9 years" },
+                { value: 10, label: "10 years" },
+                { value: 11, label: "11 years" },
+                { value: 12, label: "12+ years" }
+            ];
+
+            const buttonsContainer = document.getElementById('age-buttons');
+            buttonsContainer.innerHTML = '';
+
+            ageOptions.forEach(option => {
+                const button = document.createElement('button');
+                button.className = `age-btn px-3 py-2 rounded text-xs transition-all ${option.value === 3 ? 'bg-purple-500 text-white' : 'bg-white text-gray-700 border border-gray-300'}`;
+                button.textContent = option.label;
+                button.setAttribute('data-age', option.value);
+                button.onclick = () => {
+                    document.getElementById('age-slider').value = option.value;
+                    updateAge(option.value);
+                };
+                buttonsContainer.appendChild(button);
+            });
+        }
+
+        function initializeCollectionSelection() {
+            const grid = document.getElementById('collections-grid');
+            grid.innerHTML = '';
+
+            collections.forEach(collection => {
+                const card = document.createElement('div');
+                card.className = 'collection-card bg-white rounded-lg shadow-lg p-6 transition-all duration-300';
+                card.setAttribute('data-collection', collection.id);
+                
+                card.innerHTML = `
+                    <div class="text-center pb-4">
+                        <div class="text-4xl mb-3">${collection.image}</div>
+                        <h3 class="text-lg font-semibold">${collection.name}</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <p class="text-sm text-gray-600 leading-relaxed">${collection.description}</p>
+                        
+                        <div>
+                            <p class="text-xs font-medium text-gray-500 mb-2">Includes:</p>
+                            <div class="flex flex-wrap gap-1">
+                                ${collection.items.map(item => `<span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">${item}</span>`).join('')}
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <p class="text-xs font-medium text-gray-500 mb-2">Featured Brands:</p>
+                            <div class="flex flex-wrap gap-1">
+                                ${collection.brands.map(brand => `<span class="border border-gray-300 text-gray-600 px-2 py-1 rounded text-xs">${brand}</span>`).join('')}
+                            </div>
+                        </div>
+                        
+                        <div class="pt-2">
+                            <button class="select-btn w-full py-2 px-4 rounded border border-gray-300 text-gray-700 transition-all">
+                                Select
+                            </button>
+                        </div>
+                    </div>
+                `;
+
+                card.onclick = () => toggleCollection(collection.id);
+                grid.appendChild(card);
+            });
+        }
+
+        function toggleCollection(collectionId) {
+            const index = appState.selectedCollections.indexOf(collectionId);
+            const card = document.querySelector(`[data-collection="${collectionId}"]`);
+            const button = card.querySelector('.select-btn');
+
+            if (index > -1) {
+                // Remove from selection
+                appState.selectedCollections.splice(index, 1);
+                card.classList.remove('selected');
+                button.textContent = 'Select';
+                button.classList.remove('bg-purple-500', 'text-white');
+                button.classList.add('border', 'border-gray-300', 'text-gray-700');
+            } else {
+                // Add to selection
+                appState.selectedCollections.push(collectionId);
+                card.classList.add('selected');
+                button.textContent = 'Selected ✓';
+                button.classList.remove('border', 'border-gray-300', 'text-gray-700');
+                button.classList.add('bg-purple-500', 'text-white');
+            }
+
+            updateSelectionCount();
+        }
+
+        function updateSelectionCount() {
+            const count = appState.selectedCollections.length;
+            const countElement = document.getElementById('selected-count');
+            const countText = document.getElementById('count-text');
+            const continueBtn = document.getElementById('continue-btn');
+
+            if (count > 0) {
+                countElement.classList.remove('hidden');
+                countText.textContent = `${count} collection${count !== 1 ? 's' : ''} selected`;
+                continueBtn.disabled = false;
+                continueBtn.textContent = `Continue (${count})`;
+                continueBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            } else {
+                countElement.classList.add('hidden');
+                continueBtn.disabled = true;
+                continueBtn.textContent = 'Continue (0)';
+                continueBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            }
+        }
+
+        function initializeContactForm() {
+            updateSelectionSummary();
+            
+            document.getElementById('contact-form-element').onsubmit = function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(e.target);
+                const contactInfo = {
+                    parentName: formData.get('parentName'),
+                    childName: formData.get('childName'),
+                    phone: formData.get('phone'),
+                    address: formData.get('address')
+                };
+
+                // Validate required fields
+                if (!contactInfo.parentName || !contactInfo.childName || !contactInfo.phone || !contactInfo.address) {
+                    alert('Please fill in all fields');
+                    return;
+                }
+
+                appState.contactInfo = contactInfo;
+                showPage('scheduling');
+                initializeScheduling();
+            };
+        }
+
+        function updateSelectionSummary() {
+            const summary = document.getElementById('selection-summary');
+            let summaryHTML = '';
+
+            if (appState.category) {
+                summaryHTML += `<p>Category: <span class="capitalize">${appState.category}</span></p>`;
+            }
+            if (appState.gender) {
+                summaryHTML += `<p>Gender: <span class="capitalize">${appState.gender}</span></p>`;
+            }
+            if (appState.age !== undefined) {
+                summaryHTML += `<p>Age: ${getAgeText(appState.age)}</p>`;
+            }
+            if (appState.selectedCollections.length > 0) {
+                summaryHTML += `<p>Collections: ${appState.selectedCollections.length} selected</p>`;
+            }
+
+            summary.innerHTML = summaryHTML;
+        }
+
+        function initializeScheduling() {
+            generateCalendar();
+            generateTimeSlots();
+            updateBookingSummary();
+        }
+
+        function generateCalendar() {
+            const calendar = document.getElementById('calendar');
+            const today = new Date();
+            const currentMonth = today.getMonth();
+            const currentYear = today.getFullYear();
+
+            // Generate calendar for current month
+            const monthNames = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"];
+            
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+
+            let calendarHTML = `
+                <div class="text-center mb-4">
+                    <h3 class="text-lg font-semibold">${monthNames[currentMonth]} ${currentYear}</h3>
+                </div>
+                <div class="calendar-grid text-center text-sm">
+                    <div class="font-medium text-gray-500 py-2">Sun</div>
+                    <div class="font-medium text-gray-500 py-2">Mon</div>
+                    <div class="font-medium text-gray-500 py-2">Tue</div>
+                    <div class="font-medium text-gray-500 py-2">Wed</div>
+                    <div class="font-medium text-gray-500 py-2">Thu</div>
+                    <div class="font-medium text-gray-500 py-2">Fri</div>
+                    <div class="font-medium text-gray-500 py-2">Sat</div>
+            `;
+
+            // Empty cells for days before the first day of the month
+            for (let i = 0; i < firstDay; i++) {
+                calendarHTML += '<div></div>';
+            }
+
+            // Days of the month
+            for (let day = 1; day <= daysInMonth; day++) {
+                const date = new Date(currentYear, currentMonth, day);
+                const isToday = day === today.getDate();
+                const isPast = date < today;
+                const isSelectable = date > today;
+
+                let classes = 'calendar-day text-sm';
+                if (isPast) {
+                    classes += ' disabled text-gray-400';
+                } else if (isSelectable) {
+                    classes += ' hover:bg-blue-100 cursor-pointer';
+                }
+                if (isToday) {
+                    classes += ' bg-blue-100';
+                }
+
+                calendarHTML += `<div class="${classes}" ${isSelectable ? `onclick="selectDate('${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}')"` : ''}>${day}</div>`;
+            }
+
+            calendarHTML += '</div>';
+            calendar.innerHTML = calendarHTML;
+        }
+
+        function selectDate(dateString) {
+            appState.selectedDate = dateString;
+            
+            // Update calendar display
+            document.querySelectorAll('.calendar-day').forEach(day => {
+                day.classList.remove('selected');
+            });
+            event.target.classList.add('selected');
+
+            // Update time slots
+            const date = new Date(dateString);
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('selected-date-text').textContent = `Available slots for ${date.toLocaleDateString('en-US', options)}`;
+            
+            document.getElementById('time-slots').classList.remove('hidden');
+            updateBookingSummary();
+        }
+
+        function generateTimeSlots() {
+            const timeSlotsContainer = document.getElementById('time-slots');
+            
+            let slotsHTML = '';
+            timeSlots.forEach(slot => {
+                slotsHTML += `
+                    <div class="time-slot bg-white border border-gray-200 rounded-lg p-4 cursor-pointer" data-slot="${slot.id}" onclick="selectTimeSlot('${slot.id}')">
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium">${slot.label}</span>
+                            <span class="text-xs px-2 py-1 rounded ${slot.available ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}">
+                                ${slot.available ? 'Available' : 'Booked'}
+                            </span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            timeSlotsContainer.innerHTML = slotsHTML;
+        }
+
+        function selectTimeSlot(slotId) {
+            if (!appState.selectedDate) {
+                alert('Please select a date first');
+                return;
+            }
+
+            appState.selectedTimeSlot = slotId;
+            
+            // Update time slot display
+            document.querySelectorAll('.time-slot').forEach(slot => {
+                slot.classList.remove('selected');
+            });
+            document.querySelector(`[data-slot="${slotId}"]`).classList.add('selected');
+
+            updateBookingSummary();
+        }
+
+        function updateBookingSummary() {
+            if (appState.selectedDate && appState.selectedTimeSlot && appState.contactInfo.parentName) {
+                const summary = document.getElementById('booking-summary');
+                summary.classList.remove('hidden');
+
+                const customerDetails = document.getElementById('customer-details');
+                customerDetails.innerHTML = `
+                    <p>Parent: ${appState.contactInfo.parentName}</p>
+                    <p>Child: ${appState.contactInfo.childName}</p>
+                    <p>Phone: ${appState.contactInfo.phone}</p>
+                `;
+
+                const visitDetails = document.getElementById('visit-details');
+                const date = new Date(appState.selectedDate);
+                const selectedSlot = timeSlots.find(slot => slot.id === appState.selectedTimeSlot);
+                
+                visitDetails.innerHTML = `
+                    <p>Date: ${date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                    <p>Time: ${selectedSlot ? selectedSlot.label : ''}</p>
+                    <p>Collections: ${appState.selectedCollections.length} selected</p>
+                `;
+
+                document.getElementById('confirm-booking-btn').disabled = false;
+                document.getElementById('confirm-booking-btn').classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+        }
+
+        function confirmBooking() {
+            if (!appState.selectedDate || !appState.selectedTimeSlot) {
+                alert('Please select date and time');
+                return;
+            }
+
+            const date = new Date(appState.selectedDate);
+            const selectedSlot = timeSlots.find(slot => slot.id === appState.selectedTimeSlot);
+            
+            document.getElementById('success-message').textContent = 
+                `We'll visit you on ${date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })} during ${selectedSlot.label}`;
+            
+            document.getElementById('success-modal').classList.remove('hidden');
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('success-modal').classList.add('hidden');
+            // Reset state and go back to landing page
+            appState = {
+                category: '',
+                gender: '',
+                age: 3,
+                selectedCollections: [],
+                contactInfo: {},
+                selectedDate: null,
+                selectedTimeSlot: ''
+            };
+            showPage('landing-page');
+        }
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set up page transitions
+            document.getElementById('collection-selection').addEventListener('transitionend', function() {
+                if (!this.classList.contains('hidden')) {
+                    initializeCollectionSelection();
+                }
+            });
+
+            document.getElementById('contact-form').addEventListener('transitionend', function() {
+                if (!this.classList.contains('hidden')) {
+                    initializeContactForm();
+                }
+            });
+
+            // Show landing page initially
+            showPage('landing-page');
+        });
+    </script>
+  </body>
+</html>
